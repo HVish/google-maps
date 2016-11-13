@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>Google Maps API</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=[places api key]&libraries=places"></script>
+		<script type="text/javascript">
+			google.maps.event.addDomListener(window, 'load', function () {
+				var autoComplete = new google.maps.places.Autocomplete(document.getElementById('suggest'));
+				google.maps.event.addListener(autoComplete, 'place_changed', function () {
+					var place = autoComplete.getPlace();
+					var location = "<b>Address</b>:" + place.formatted_address + "</br>";
+					location += "<b>Latitude</b>:" + place.geometry.location.lat() + "</br>"
+					location += "<b>Longitude</b>:" + place.geometry.location.lng() + "</br>"
+					document.getElementById('details').innerHTML = location;
+				});
+			});
+		</script>
+		<span>Type Address:</span><input type="text" id="suggest" style="width:200px" placeholder="Type an address" name="name" value="">
+		<label id="details"></label>
+	</body>
+</html>
